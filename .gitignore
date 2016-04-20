@@ -1,0 +1,8 @@
+libpng-*
+zlib-*
+png++-*
+*.out
+.DS_Store
+obj
+bin
+*.o

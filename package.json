@@ -1,0 +1,21 @@
+{
+  "name": "pngpp-emscripten-sandbox",
+  "version": "1.0.0",
+  "main": "bin/a.js",
+  "scripts": {
+    "build": "make clean; make asmjs",
+    "start": "http-server &",
+    "stop": "killall node */http-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/legokichi/pngpp-emscripten-sandbox.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/legokichi/pngpp-emscripten-sandbox/issues"
+  },
+  "homepage": "https://github.com/legokichi/pngpp-emscripten-sandbox#readme"
+}
