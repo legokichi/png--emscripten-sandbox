@@ -61,6 +61,7 @@ emcc -static -fno-common -DPIC  .libs/libpng_la-png.o .libs/libpng_la-pngset.o .
 ```
 wget http://download.savannah.gnu.org/releases/pngpp/png++-0.2.9.tar.gz
 tar zxvf png++-0.2.9.tar.gz
+cd png++-0.2.9
 sed -i -e "1s/^/#define __GLIBC__ 1/" ./config.hpp
 sed -i -e "1s/^/#define __STDC_LIB_EXT1__ 1/" ./error.hpp
 sed -i -e "s/strerror_s(buf, ERRBUF_SIZE, errnum);/strerror_r(errnum, buf, ERRBUF_SIZE);/" ./error.hpp
@@ -71,7 +72,6 @@ png++ の実態はヘッダファイルの集まりなのでコンパイルは�
 emcc 環境ではなんか `error.hpp` が
 
 ```
-In file included from src/main.cpp:35:
 In file included from ./png++-0.2.9/png.hpp:36:
 ./png++-0.2.9/config.hpp:63:2: error: Byte-order could not be detected.
 #error Byte-order could not be detected.
@@ -87,16 +87,18 @@ In file included from ./png++-0.2.9/png.hpp:38:
 みたいなエラーを吐くので、
 動くようになるまで sed する
 
-## using png++
+## usage
 
-### compile
+png++ の `example/pixel_generator.cpp` を動かしてみる
+
+```
+cp png++-0.2.9/example/pixel_generator.cpp src/main.cpp
+```
+
+compile & link
 
 ```
 emcc -std=c++14 -o obj/main.o -I./zlib-1.2.8 -I./libpng-1.2.56 -I./png++-0.2.9 -c src/main.cpp
-```
-
-### link
-
-```
 emcc -o bin/a.js -I./zlib-1.2.8 -I./libpng-1.2.56 -I./png++-0.2.9  ./zlib-1.2.8/libz.bc ./libpng-1.2.56/.libs/libpng.3.bc obj/main.o
+open index.html
 ```
